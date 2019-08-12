@@ -1,0 +1,12 @@
+D:\Google Drive\NICE\Programming\Adv. courses\PicturesStorage\PicturesStorage\bin\Debug\PicturesStorage.exe.config
+D:\Google Drive\NICE\Programming\Adv. courses\PicturesStorage\PicturesStorage\bin\Debug\PicturesStorage.exe
+D:\Google Drive\NICE\Programming\Adv. courses\PicturesStorage\PicturesStorage\bin\Debug\PicturesStorage.pdb
+D:\Google Drive\NICE\Programming\Adv. courses\PicturesStorage\PicturesStorage\obj\Debug\PicturesStorage.csprojAssemblyReference.cache
+D:\Google Drive\NICE\Programming\Adv. courses\PicturesStorage\PicturesStorage\obj\Debug\PicturesStorage.Properties.Resources.resources
+D:\Google Drive\NICE\Programming\Adv. courses\PicturesStorage\PicturesStorage\obj\Debug\PicturesStorage.csproj.GenerateResource.cache
+D:\Google Drive\NICE\Programming\Adv. courses\PicturesStorage\PicturesStorage\obj\Debug\PicturesStorage.csproj.CoreCompileInputs.cache
+D:\Google Drive\NICE\Programming\Adv. courses\PicturesStorage\PicturesStorage\obj\Debug\PicturesStorage.exe
+D:\Google Drive\NICE\Programming\Adv. courses\PicturesStorage\PicturesStorage\obj\Debug\PicturesStorage.pdb
+D:\Google Drive\NICE\Programming\Adv. courses\PicturesStorage\PicturesStorage\obj\Debug\PicturesStorage.StartWindow.resources
+D:\Google Drive\NICE\Programming\Adv. courses\PicturesStorage\PicturesStorage\obj\Debug\PicturesStorage.UploadWindow.resources
+D:\Google Drive\NICE\Programming\Adv. courses\PicturesStorage\PicturesStorage\obj\Debug\PicturesStorage.FindWindow.resources
