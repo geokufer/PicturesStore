@@ -1,0 +1,14 @@
+C:\Users\George\Source\Repos\PicturesStore\Controller\bin\Debug\Controller.dll
+C:\Users\George\Source\Repos\PicturesStore\Controller\bin\Debug\Controller.pdb
+C:\Users\George\Source\Repos\PicturesStore\Controller\bin\Debug\GUI.dll
+C:\Users\George\Source\Repos\PicturesStore\Controller\bin\Debug\Model.dll
+C:\Users\George\Source\Repos\PicturesStore\Controller\bin\Debug\EntityFramework.dll
+C:\Users\George\Source\Repos\PicturesStore\Controller\bin\Debug\GUI.pdb
+C:\Users\George\Source\Repos\PicturesStore\Controller\bin\Debug\Model.pdb
+C:\Users\George\Source\Repos\PicturesStore\Controller\bin\Debug\Model.dll.config
+C:\Users\George\Source\Repos\PicturesStore\Controller\bin\Debug\EntityFramework.xml
+C:\Users\George\Source\Repos\PicturesStore\Controller\obj\Debug\Controller.csprojAssemblyReference.cache
+C:\Users\George\Source\Repos\PicturesStore\Controller\obj\Debug\Controller.csproj.CoreCompileInputs.cache
+C:\Users\George\Source\Repos\PicturesStore\Controller\obj\Debug\Controller.csproj.CopyComplete
+C:\Users\George\Source\Repos\PicturesStore\Controller\obj\Debug\Controller.dll
+C:\Users\George\Source\Repos\PicturesStore\Controller\obj\Debug\Controller.pdb
