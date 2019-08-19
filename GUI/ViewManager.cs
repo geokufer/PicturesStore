@@ -63,8 +63,9 @@ namespace GUI
         }
         public void LoadGUI()
         {
-            Application.Run(startWindow);
             LoadPictureInfo();
+            Application.Run(startWindow);
+            //startWindow.Show();
         }
 
         public void GetPictureInfo()

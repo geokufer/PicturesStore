@@ -1,20 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity;
-
-namespace Model.Entities
+namespace Model
 {
+    using System;
+    using System.Data.Entity;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
+    using System.Collections.Generic;
+
     public partial class PictureInfoDBContext : DbContext
     {
-        public PictureInfoDBContext(string nameOrConnectionString)
-            : base(nameOrConnectionString)
+        public PictureInfoDBContext()
+            : base("name=PictureInfoDBContext")
         {
         }
 
-        public DbSet<Picture> Pictures { get; set; }
-        public DbSet<Tag> Tags { get; set; }
+        public virtual DbSet<Picture> Pictures { get; set; }
+        public virtual DbSet<Tag> Tags { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

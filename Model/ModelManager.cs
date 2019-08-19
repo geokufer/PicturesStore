@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GUI;
-using Model.Entities;
+using PictureInfoDB = PictureInfoDBContext.PictureInfoDBContext;
 
 namespace Model
 {
@@ -20,7 +20,7 @@ namespace Model
 
         public void GetTags()
         {
-            using (PictureInfoDBContext db = new PictureInfoDBContext(DBName))
+            using (PictureInfoDB db = new PictureInfoDB(DBName))
             {
                 List<string> TagName = new List<string>();
                 foreach (var tag in db.GetAllTags())
@@ -32,7 +32,7 @@ namespace Model
         }
         public void GetPicturesPathes()
         {
-            using (PictureInfoDBContext db = new PictureInfoDBContext(DBName))
+            using (PictureInfoDB db = new PictureInfoDB(DBName))
             {
                 List<string> PicturePathes = new List<string>();
                 foreach (var picture in db.GetAllPictures())
