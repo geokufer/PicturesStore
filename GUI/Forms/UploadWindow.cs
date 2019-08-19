@@ -16,5 +16,23 @@ namespace PicturesStorage
         {
             InitializeComponent();
         }
+
+        private void FindPicturePath_button_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog()==DialogResult.Cancel)
+                return;
+            Path_textBox3.Text = openFileDialog1.FileName;
+        }
+
+        internal void UploadTags(List<string> tags)
+        {
+            TagsList.DataSource = tags;
+        }
+
+        public void Clear()
+        {
+            Path_textBox3.Text = string.Empty;
+            TagsList.DataSource = null;
+        }
     }
 }

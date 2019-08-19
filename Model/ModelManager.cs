@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GUI;
+using PictureInfoDBContext;
 using PictureInfoDB = PictureInfoDBContext.PictureInfoDBContext;
 
 namespace Model
@@ -30,6 +31,27 @@ namespace Model
                 view.OnTagsNameUpdate(TagName);
             }
         }
+
+        public bool AddPictureToDB(string path, List<string> selectedTags)
+        {
+            using (PictureInfoDB db = new PictureInfoDB(DBName))
+            {
+                try
+                {
+                    db.AddPicture(path);
+                    foreach (var tagName in selectedTags)
+                    {
+                        db.AddTagsToPicture(path, new Tag { Name = tagName});
+                    }
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+                return true;
+            }
+        }
+
         public void GetPicturesPathes()
         {
             using (PictureInfoDB db = new PictureInfoDB(DBName))
@@ -42,6 +64,8 @@ namespace Model
                 view.OnPicturePathUpdate(PicturePathes);
             }
         }
+
+
     }
 
 }

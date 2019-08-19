@@ -20,7 +20,10 @@ namespace Controller
             model = new ModelManager(view as ViewManager);
 
             view.LoadPictureInfo += getPicturesInfoFromDB;
+            view.AddPictureInfo += AddPictureInfo;
         }
+
+        private bool AddPictureInfo(string path, List<string> selectedTags) => model.AddPictureToDB(path, selectedTags);
 
         private void getPicturesInfoFromDB()
         {
@@ -32,6 +35,8 @@ namespace Controller
         {
            view.LoadGUI();
         }
+
+
 
 
     }

@@ -16,6 +16,7 @@ namespace GUI
         private UploadWindow uploadWindow = null;
 
         public event LoadPictureInformation LoadPictureInfo;
+        public event AddPictureInformation AddPictureInfo;
 
         public ViewManager()
         {
@@ -26,8 +27,11 @@ namespace GUI
             startWindow.LanguageChange += languageChangeHandler;
             startWindow.WindowCalled += windowCallHandler;
             startWindow.ThemeChange += themeChangeHandler;
+
         }
 
+        #region Main form event's handlers
+        //Main form event's handlers//
         private void themeChangeHandler(Theme theme)
         {
             throw new NotImplementedException();
@@ -38,7 +42,8 @@ namespace GUI
         }
         private void windowCallHandler(Windows window)
         {
-            DialogResult result;
+            LoadPictureInfo();
+
             switch (window)
             {
                 case Windows.None:
@@ -46,26 +51,50 @@ namespace GUI
                 case Windows.StartWindow:
                     break;
                 case Windows.FindWindow:
-                    result = findWindow.ShowDialog();
-                    if (result == DialogResult.OK)
+                    if (findWindow.ShowDialog() == DialogResult.OK)
                     {
 
                     }
                     break;
                 case Windows.UploadWindow:
-                    result = uploadWindow.ShowDialog();
-                    if (result == DialogResult.OK)
+                    if (uploadWindow.ShowDialog() == DialogResult.OK)
                     {
+                        if (string.IsNullOrEmpty(uploadWindow.Path_textBox3.Text) ||
+                            uploadWindow.TagsList.SelectedItems.Count < 1)
+                        {
+                            MessageBox.Show("Select file please or select tag!");
+                            uploadWindow.Clear();
+                            return;
+                        }
 
+                        List<string> selectedTags = new List<string>();
+                        foreach (string item in uploadWindow.TagsList.SelectedItems)
+                        {
+                            selectedTags.Add(item);
+                        }
+
+                        if (AddPictureInfo(uploadWindow.Path_textBox3.Text, selectedTags))
+                        {
+                            MessageBox.Show("Picture added successfully");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Picture added failed");
+                        }
                     }
+                    uploadWindow.Clear();
                     break;
             }
         }
+        #endregion
+
+        #region Upload form handlers
+
+        #endregion
         public void LoadGUI()
         {
             LoadPictureInfo();
             Application.Run(startWindow);
-            //startWindow.Show();
         }
 
         public void GetPictureInfo()
@@ -79,7 +108,10 @@ namespace GUI
         public void OnTagsNameUpdate(List<string> tags)
         {
             findWindow.UploadTags(tags);
+            uploadWindow.UploadTags(tags);
         }
+
+
 
     }
 
