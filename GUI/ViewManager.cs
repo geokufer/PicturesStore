@@ -6,20 +6,28 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.Threading;
+using System.ComponentModel;
+using System.Globalization;
 
 namespace GUI
 {
+
     public class ViewManager : IViewController, IViewModel
     {
         private StartWindow startWindow = null;
         private FindWindow findWindow = null;
         private UploadWindow uploadWindow = null;
 
+        
+        public static string LanguageProperty = Properties.Settings.Default.Language;
+
         public event LoadPictureInformation LoadPictureInfo;
         public event AddPictureInformation AddPictureInfo;
 
         public ViewManager()
         {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(LanguageProperty);
             startWindow = new StartWindow();
             findWindow = new FindWindow();
             uploadWindow = new UploadWindow();
@@ -27,7 +35,6 @@ namespace GUI
             startWindow.LanguageChange += languageChangeHandler;
             startWindow.WindowCalled += windowCallHandler;
             startWindow.ThemeChange += themeChangeHandler;
-
         }
 
         #region Main form event's handlers
@@ -36,9 +43,34 @@ namespace GUI
         {
             throw new NotImplementedException();
         }
+        
+
         private void languageChangeHandler(Language language)
         {
-            throw new NotImplementedException();
+            if (MessageBox.Show("Change language required restart application." +
+                "\n Change language?",
+                "Are you sure?",
+                MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+            {
+                return;
+            }
+            switch (language)
+            {
+                case Language.English:
+                    LanguageProperty = "en-US";
+                    Properties.Settings.Default.Language = "en-US";
+                    Properties.Settings.Default.Save();
+                    break;
+                case Language.Ukrainian:
+                    LanguageProperty = "uk-UA";
+                    Properties.Settings.Default.Language = "uk-UA";
+                    Properties.Settings.Default.Save();
+                    break;
+                default:
+                    break;
+            }
+
+
         }
         private void windowCallHandler(Windows window)
         {
@@ -46,16 +78,6 @@ namespace GUI
 
             switch (window)
             {
-                case Windows.None:
-                    break;
-                case Windows.StartWindow:
-                    break;
-                case Windows.FindWindow:
-                    if (findWindow.ShowDialog() == DialogResult.OK)
-                    {
-
-                    }
-                    break;
                 case Windows.UploadWindow:
                     if (uploadWindow.ShowDialog() == DialogResult.OK)
                     {
@@ -84,6 +106,16 @@ namespace GUI
                     }
                     uploadWindow.Clear();
                     break;
+
+                case Windows.FindWindow:
+                    findWindow.ShowDialog();
+                    break;
+
+                case Windows.None:
+                    break;
+
+                case Windows.StartWindow:
+                    break;
             }
         }
         #endregion
@@ -111,6 +143,34 @@ namespace GUI
             uploadWindow.UploadTags(tags);
         }
 
+
+        #region Change language on programm run (not work correctly=> Control.ControlCollection doesn't have all form elements)
+        //static List<Form> forms = new List<Form>();
+        //private static void ChangeLanguage(string lang)
+        //{
+        //    Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(lang);
+        //    foreach (Form frm in forms)
+        //    {
+        //        localizeForm(frm);
+        //    }
+        //}
+
+        //private static void localizeForm(Form frm)
+        //{
+        //    var manager = new ComponentResourceManager(frm.GetType());
+        //    manager.ApplyResources(frm, "$this");
+        //    applyResources(manager, frm.Controls);
+        //}
+
+        //private static void applyResources(ComponentResourceManager manager, Control.ControlCollection ctls)
+        //{
+        //    foreach (Control ctl in ctls)
+        //    {
+        //        manager.ApplyResources(ctl, ctl.Name);
+        //        applyResources(manager, ctl.Controls);
+        //    }
+        //}
+        #endregion
 
 
     }

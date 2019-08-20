@@ -1,13 +1,11 @@
 ﻿using GUI;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using GUI.Properties;
+using System.Threading;
+using System.Globalization;
+using System.Resources;
+using System.ComponentModel;
 
 namespace PicturesStorage
 {
@@ -21,6 +19,8 @@ namespace PicturesStorage
         public event OnLanguageChange LanguageChange;
         public event OnThemeChange ThemeChange;
         public event OnWindowCalled WindowCalled;
+
+        
 
         public StartWindow()
         {
@@ -61,6 +61,5 @@ namespace PicturesStorage
         {
             ThemeChange(Theme.Brick);
         }
-
     }
 }

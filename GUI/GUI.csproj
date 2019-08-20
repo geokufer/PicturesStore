@@ -46,6 +46,12 @@
   <ItemGroup>
     <Compile Include="Interfaces\IViewController.cs" />
     <Compile Include="Interfaces\IViewModel.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="ViewManager.cs" />
     <Compile Include="Forms\FindWindow.cs">
       <SubType>Form</SubType>
@@ -71,12 +77,28 @@
     <EmbeddedResource Include="Forms\FindWindow.resx">
       <DependentUpon>FindWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FindWindow.uk-UA.resx">
+      <DependentUpon>FindWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\StartWindow.resx">
+      <DependentUpon>StartWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StartWindow.uk-UA.resx">
       <DependentUpon>StartWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UploadWindow.resx">
       <DependentUpon>UploadWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UploadWindow.uk-UA.resx">
+      <DependentUpon>UploadWindow.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
