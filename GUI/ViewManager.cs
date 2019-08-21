@@ -12,7 +12,6 @@ using System.Globalization;
 
 namespace GUI
 {
-
     public class ViewManager : IViewController, IViewModel
     {
         private StartWindow startWindow = null;
@@ -24,6 +23,7 @@ namespace GUI
 
         public event LoadPictureInformation LoadPictureInfo;
         public event AddPictureInformation AddPictureInfo;
+        public event LoadPicturePathesByTags queryToPictureByTags;
 
         public ViewManager()
         {
@@ -35,15 +35,16 @@ namespace GUI
             startWindow.LanguageChange += languageChangeHandler;
             startWindow.WindowCalled += windowCallHandler;
             startWindow.ThemeChange += themeChangeHandler;
+
+            findWindow.LoadPicturePathes += queryForPicturePathes;
         }
 
-        #region Main form event's handlers
+        #region Start form event's handlers
         //Main form event's handlers//
         private void themeChangeHandler(Theme theme)
         {
             throw new NotImplementedException();
         }
-        
 
         private void languageChangeHandler(Language language)
         {
@@ -121,8 +122,13 @@ namespace GUI
         #endregion
 
         #region Upload form handlers
-
+        private List<string> queryForPicturePathes(List<string> pathes)
+        {
+            return queryToPictureByTags(pathes);
+        }
         #endregion
+
+
         public void LoadGUI()
         {
             LoadPictureInfo();
@@ -171,8 +177,6 @@ namespace GUI
         //    }
         //}
         #endregion
-
-
     }
 
     #region Enums

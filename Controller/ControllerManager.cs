@@ -21,6 +21,13 @@ namespace Controller
 
             view.LoadPictureInfo += getPicturesInfoFromDB;
             view.AddPictureInfo += AddPictureInfo;
+            view.queryToPictureByTags += getPicturesByTags;
+        }
+
+        private List<string> getPicturesByTags(List<string> tags)
+        {
+            //TODO here singleton
+            return model.GetPicturesPathes(tags);
         }
 
         private bool AddPictureInfo(string path, List<string> selectedTags) => model.AddPictureToDB(path, selectedTags);
@@ -28,7 +35,7 @@ namespace Controller
         private void getPicturesInfoFromDB()
         {
             model.GetTags();
-            model.GetPicturesPathes();
+            model.GetPicturesPathesToView();
         }
 
         public void Start()

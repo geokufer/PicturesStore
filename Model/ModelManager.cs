@@ -52,7 +52,7 @@ namespace Model
             }
         }
 
-        public void GetPicturesPathes()
+        public void GetPicturesPathesToView()
         {
             using (PictureInfoDB db = new PictureInfoDB(DBName))
             {
@@ -64,7 +64,37 @@ namespace Model
                 view.OnPicturePathUpdate(PicturePathes);
             }
         }
+        public List<string> GetPicturesPathes(List<string> tags)
+        {
+            using (PictureInfoDB db = new PictureInfoDB(DBName))
+            {
+                List<string> PicturePathes = new List<string>();
+                foreach (var picture in db.GetAllPictures())
+                {
+                    //get all tag which binding to picture
+                    List<string> pictureTags = new List<string>();
+                    foreach (var tag in picture.Tags)
+                    {
+                        pictureTags.Add(tag.Name);
+                    }
 
+                    //add picture to main list of picture pathes, when at least one tag is equal 
+                    if (pictureTags.Count == 0)
+                    {
+                        continue;
+                    }
+                    foreach (var tag in pictureTags)
+                    {
+                        if (tags.Contains(tag))
+                        {
+                            PicturePathes.Add(picture.Path);
+                            break; 
+                        }
+                    }                               
+                }
+                return PicturePathes;
+            }
+        }
 
     }
 

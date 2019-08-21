@@ -80,6 +80,7 @@
             resources.ApplyResources(this.Pathes_listBox, "Pathes_listBox");
             this.Pathes_listBox.FormattingEnabled = true;
             this.Pathes_listBox.Name = "Pathes_listBox";
+            this.Pathes_listBox.SelectedIndexChanged += new System.EventHandler(this.Pathes_listBox_SelectedIndexChanged);
             // 
             // groupBox3
             // 

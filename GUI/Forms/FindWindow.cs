@@ -7,13 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace PicturesStorage
 {
-    delegate List<string> LoadPicturePathesByTags (List<string> pathes);
+    public delegate List<string> LoadPicturePathesByTags (List<string> pathes);
     public partial class FindWindow : Form
     {
-        event LoadPicturePathesByTags LoadPicturePathes;
+        public event LoadPicturePathesByTags LoadPicturePathes;
         public FindWindow()
         {
             InitializeComponent();
@@ -28,7 +29,7 @@ namespace PicturesStorage
         {
             if (TagsList.SelectedItems.Count < 1)
             {
-                MessageBox.Show("Select more than 1 tag");
+                MessageBox.Show("Select nothing");
                 return;
             }
 
@@ -39,16 +40,29 @@ namespace PicturesStorage
                 tags.Add(item);
             }
 
-
+            //event to load pictures by tag from db
             List<string> pathes = LoadPicturePathes(tags);
             if (pathes == null)
             {
                 MessageBox.Show("Failed to load pathes");
                 return;
             }
-
+            //show picture pathes in listbox
             Pathes_listBox.DataSource = pathes;
             //TODO end flow of load pathes
+        }
+
+        private void Pathes_listBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                pictureBox1.Image = Image.FromFile(Pathes_listBox.SelectedItem.ToString());
+            }
+            catch (FileNotFoundException exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+           
         }
     }
 }

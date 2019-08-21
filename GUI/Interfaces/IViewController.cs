@@ -8,10 +8,13 @@ namespace GUI
 {
     public delegate void LoadPictureInformation();
     public delegate bool AddPictureInformation(string path, List<string> tags);
+    public delegate List<string> LoadPicturePathesByTags(List<string> tags);
+
     public interface IViewController
     {
         void LoadGUI();
         event AddPictureInformation AddPictureInfo;
         event LoadPictureInformation LoadPictureInfo;
+        event LoadPicturePathesByTags queryToPictureByTags;
     }
 }

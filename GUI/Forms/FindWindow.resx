@@ -128,14 +128,11 @@
   <data name="&gt;&gt;TagsList.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
-  <data name="groupBox1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Verdana, 12pt</value>
-  </data>
   <data name="&gt;&gt;Back_button.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>FindWindow</value>
   </data>
   <data name="&gt;&gt;Find_button.Name" xml:space="preserve">
     <value>Find_button</value>
@@ -163,6 +160,9 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;Back_button.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="Find_button.Location" type="System.Drawing.Point, System.Drawing">
@@ -231,6 +231,9 @@
   <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
+  <data name="groupBox2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 15</value>
   </data>
@@ -291,14 +294,11 @@
   <data name="groupBox3.Font" type="System.Drawing.Font, System.Drawing">
     <value>Verdana, 12pt</value>
   </data>
-  <data name="groupBox2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="groupBox1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Verdana, 12pt</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
     <value>275, 425</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>FindWindow</value>
   </data>
   <data name="&gt;&gt;groupBox3.Name" xml:space="preserve">
     <value>groupBox3</value>
@@ -354,8 +354,8 @@
   <data name="Back_button.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 12pt</value>
   </data>
-  <data name="&gt;&gt;Back_button.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
     <value>2</value>
