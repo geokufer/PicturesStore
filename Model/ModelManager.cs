@@ -9,14 +9,38 @@ using PictureInfoDB = PictureInfoDBContext.PictureInfoDBContext;
 
 namespace Model
 {
+    //TODO SingleTon
     public class ModelManager
     {
         const string DBName = "PictureInfoDB";
-
+        private static object lockObject = new object();
         IViewModel view;
-        public ModelManager(IViewModel view)
+        private static ModelManager modelManager;
+
+
+        protected ModelManager(IViewModel view)
         {
             this.view = view;
+        }
+
+        public static ModelManager GetInstatnce(IViewModel view)
+        {
+            if (view == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            if (modelManager == null)
+            {
+                lock (lockObject)
+                {
+                    if (modelManager == null)
+                    {
+                        modelManager = new ModelManager(view);
+                    }
+                }
+            }
+            return modelManager;
         }
 
         public void GetTags()

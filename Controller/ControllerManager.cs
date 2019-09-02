@@ -17,7 +17,7 @@ namespace Controller
         public ControllerManager()
         {
             view = new ViewManager();
-            model = new ModelManager(view as ViewManager);
+            model = ModelManager.GetInstatnce(view as ViewManager);
 
             view.LoadPictureInfo += getPicturesInfoFromDB;
             view.AddPictureInfo += AddPictureInfo;
@@ -26,7 +26,6 @@ namespace Controller
 
         private List<string> getPicturesByTags(List<string> tags)
         {
-            //TODO here singleton
             return model.GetPicturesPathes(tags);
         }
 
@@ -42,9 +41,5 @@ namespace Controller
         {
            view.LoadGUI();
         }
-
-
-
-
     }
 }

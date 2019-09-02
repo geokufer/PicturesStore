@@ -24,8 +24,7 @@ namespace EntryPoint
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
-                Console.ReadLine();
+                MessageBox.Show(e.Message);
             }
             finally
             {
