@@ -11,6 +11,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Drawing;
 
+
 namespace GUI
 {
     public class ViewManager : IViewController, IViewModel
@@ -21,6 +22,7 @@ namespace GUI
 
         
         public static string LanguageProperty = Properties.Settings.Default.Language;
+        public static int ThemeProperty = Properties.Settings.Default.Theme;
 
         public event LoadPictureInformation LoadPictureInfo;
         public event AddPictureInformation AddPictureInfo;
@@ -29,9 +31,12 @@ namespace GUI
         public ViewManager()
         {
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(LanguageProperty);
+
             startWindow = new StartWindow();
             findWindow = new FindWindow();
             uploadWindow = new UploadWindow();
+
+            themeChangeHandler((Theme)ThemeProperty);
 
             startWindow.LanguageChange += languageChangeHandler;
             startWindow.WindowCalled += windowCallHandler;
@@ -46,51 +51,49 @@ namespace GUI
         {
             switch (theme)
             {
-                case Theme.Frog:
-                    themeChange(Properties.Resources.frog);
+                case Theme.Brick:
+                    themeChange(Properties.Resources.brick);
+                    ThemeProperty = (int)Theme.Brick;
                     break;
                 case Theme.Navy:
                     themeChange(Properties.Resources.navy);
+                    ThemeProperty = (int)Theme.Navy;
                     break;
-                case Theme.Brick:
-                    themeChange(Properties.Resources.brick);
+                case Theme.Frog:
+                    themeChange(Properties.Resources.frog);
+                    ThemeProperty = (int)Theme.Frog;
                     break;
             }
+            Properties.Settings.Default.Theme = ThemeProperty;
+            Properties.Settings.Default.Save();
         }
-
         private void themeChange(Bitmap backgroungImage)
         {
             startWindow.BackgroundImage = backgroungImage;
             findWindow.BackgroundImage = backgroungImage;
             uploadWindow.BackgroundImage = backgroungImage;
         }
-
         private void languageChangeHandler(Language language)
         {
-            if (MessageBox.Show("Change language required restart application." +
-                "\n Change language?",
-                "Are you sure?",
-                MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+            if (MessageBox.Show("For language change restart application required." +
+                "\nChange language?",
+                "Change language",
+                MessageBoxButtons.OKCancel,MessageBoxIcon.Warning) == DialogResult.Cancel)
             {
                 return;
             }
+
             switch (language)
             {
                 case Language.English:
                     LanguageProperty = "en-US";
-                    Properties.Settings.Default.Language = "en-US";
-                    Properties.Settings.Default.Save();
                     break;
                 case Language.Ukrainian:
                     LanguageProperty = "uk-UA";
-                    Properties.Settings.Default.Language = "uk-UA";
-                    Properties.Settings.Default.Save();
-                    break;
-                default:
                     break;
             }
-
-
+            Properties.Settings.Default.Language = LanguageProperty;
+            Properties.Settings.Default.Save();
         }
         private void windowCallHandler(Windows window)
         {
@@ -201,9 +204,9 @@ namespace GUI
     #region Enums
     public enum Theme
     {
-        Frog = 0,
+        Brick = 0,
         Navy = 1,
-        Brick = 2
+        Frog = 2
     }
     public enum Language
     {
