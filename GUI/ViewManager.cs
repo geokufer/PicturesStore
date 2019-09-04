@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.ComponentModel;
 using System.Globalization;
+using System.Drawing;
 
 namespace GUI
 {
@@ -43,7 +44,25 @@ namespace GUI
         //Main form event's handlers//
         private void themeChangeHandler(Theme theme)
         {
-            throw new NotImplementedException();
+            switch (theme)
+            {
+                case Theme.Frog:
+                    themeChange(Properties.Resources.frog);
+                    break;
+                case Theme.Navy:
+                    themeChange(Properties.Resources.navy);
+                    break;
+                case Theme.Brick:
+                    themeChange(Properties.Resources.brick);
+                    break;
+            }
+        }
+
+        private void themeChange(Bitmap backgroungImage)
+        {
+            startWindow.BackgroundImage = backgroungImage;
+            findWindow.BackgroundImage = backgroungImage;
+            uploadWindow.BackgroundImage = backgroungImage;
         }
 
         private void languageChangeHandler(Language language)

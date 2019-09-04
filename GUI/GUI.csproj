@@ -46,6 +46,11 @@
   <ItemGroup>
     <Compile Include="Interfaces\IViewController.cs" />
     <Compile Include="Interfaces\IViewModel.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -92,6 +97,10 @@
     <EmbeddedResource Include="Forms\UploadWindow.uk-UA.resx">
       <DependentUpon>UploadWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -99,6 +108,15 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\navy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\frog.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\brick.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
