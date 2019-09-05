@@ -25,7 +25,20 @@ namespace PicturesStorage
             TagsList.DataSource = tags;
         }
 
-        private void Find_button_Click(object sender, EventArgs e)
+        private void Pathes_listBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                pictureBox1.Image = Image.FromFile(Pathes_listBox.SelectedItem.ToString());
+            }
+            catch (FileNotFoundException exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+           
+        }
+
+        private void FindButton_Click(object sender, EventArgs e)
         {
             if (TagsList.SelectedItems.Count < 1)
             {
@@ -50,19 +63,6 @@ namespace PicturesStorage
             //show picture pathes in listbox
             Pathes_listBox.DataSource = pathes;
             //TODO end flow of load pathes
-        }
-
-        private void Pathes_listBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                pictureBox1.Image = Image.FromFile(Pathes_listBox.SelectedItem.ToString());
-            }
-            catch (FileNotFoundException exception)
-            {
-                MessageBox.Show(exception.Message);
-            }
-           
         }
     }
 }

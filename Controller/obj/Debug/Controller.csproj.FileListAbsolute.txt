@@ -16,3 +16,4 @@ C:\Users\George\Source\Repos\PicturesStore\Controller\obj\Debug\Controller.cspro
 C:\Users\George\Source\Repos\PicturesStore\Controller\obj\Debug\Controller.dll
 C:\Users\George\Source\Repos\PicturesStore\Controller\obj\Debug\Controller.pdb
 C:\Users\George\Source\Repos\PicturesStore\Controller\bin\Debug\uk\GUI.resources.dll
+C:\Users\George\Source\Repos\PicturesStore\Controller\bin\Debug\hsb\GUI.resources.dll

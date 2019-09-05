@@ -34,5 +34,25 @@ namespace PicturesStorage
             Path_textBox3.Text = string.Empty;
             TagsList.DataSource = null;
         }
+
+        private void Addtag_button_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void EditNameTagbutton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DeleteTagbutton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Edit_button_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

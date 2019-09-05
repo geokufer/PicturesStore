@@ -40,16 +40,15 @@
             this.brickToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Load_button = new System.Windows.Forms.Button();
             this.Find_button = new System.Windows.Forms.Button();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
-            resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1});
+            resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
             // 
             // toolStripMenuItem1
@@ -126,12 +125,6 @@
             this.Find_button.UseVisualStyleBackColor = false;
             this.Find_button.Click += new System.EventHandler(this.Find_button_Click);
             // 
-            // statusStrip1
-            // 
-            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            resources.ApplyResources(this.statusStrip1, "statusStrip1");
-            this.statusStrip1.Name = "statusStrip1";
-            // 
             // StartWindow
             // 
             resources.ApplyResources(this, "$this");
@@ -139,7 +132,6 @@
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.Find_button);
             this.Controls.Add(this.Load_button);
             this.MainMenuStrip = this.menuStrip1;
@@ -162,7 +154,6 @@
         private System.Windows.Forms.ToolStripMenuItem languageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ukrainianToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem englishToolStripMenuItem;
-        private System.Windows.Forms.StatusStrip statusStrip1;
         protected internal System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
     }
 }

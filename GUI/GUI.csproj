@@ -91,6 +91,9 @@
     <EmbeddedResource Include="Forms\StartWindow.uk-UA.resx">
       <DependentUpon>StartWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UploadWindow.hsb.resx">
+      <DependentUpon>UploadWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\UploadWindow.resx">
       <DependentUpon>UploadWindow.cs</DependentUpon>
     </EmbeddedResource>

@@ -32,55 +32,107 @@
             this.OK_button = new System.Windows.Forms.Button();
             this.Back_button = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.EditNameTagbutton = new System.Windows.Forms.Button();
+            this.Edit_button = new System.Windows.Forms.Button();
+            this.DeleteTagbutton = new System.Windows.Forms.Button();
+            this.addtag_button = new System.Windows.Forms.Button();
             this.TagsList = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.FindPicturePath_button = new System.Windows.Forms.Button();
             this.Path_label = new System.Windows.Forms.Label();
             this.Path_textBox3 = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.ButtonsgroupBox = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.ButtonsgroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // OK_button
             // 
-            resources.ApplyResources(this.OK_button, "OK_button");
-            this.OK_button.BackColor = System.Drawing.SystemColors.Control;
+            this.OK_button.BackColor = System.Drawing.Color.DarkGray;
             this.OK_button.DialogResult = System.Windows.Forms.DialogResult.OK;
+            resources.ApplyResources(this.OK_button, "OK_button");
             this.OK_button.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.OK_button.Name = "OK_button";
             this.OK_button.UseVisualStyleBackColor = false;
             // 
             // Back_button
             // 
-            resources.ApplyResources(this.Back_button, "Back_button");
-            this.Back_button.BackColor = System.Drawing.SystemColors.Control;
+            this.Back_button.BackColor = System.Drawing.Color.DarkGray;
             this.Back_button.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.Back_button, "Back_button");
             this.Back_button.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Back_button.Name = "Back_button";
             this.Back_button.UseVisualStyleBackColor = false;
             // 
             // groupBox1
             // 
-            resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox1.Controls.Add(this.EditNameTagbutton);
+            this.groupBox1.Controls.Add(this.Edit_button);
+            this.groupBox1.Controls.Add(this.DeleteTagbutton);
+            this.groupBox1.Controls.Add(this.addtag_button);
             this.groupBox1.Controls.Add(this.TagsList);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
+            // EditNameTagbutton
+            // 
+            this.EditNameTagbutton.BackColor = System.Drawing.SystemColors.Control;
+            this.EditNameTagbutton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.EditNameTagbutton, "EditNameTagbutton");
+            this.EditNameTagbutton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.EditNameTagbutton.Name = "EditNameTagbutton";
+            this.EditNameTagbutton.UseVisualStyleBackColor = false;
+            this.EditNameTagbutton.Click += new System.EventHandler(this.EditNameTagbutton_Click);
+            // 
+            // Edit_button
+            // 
+            this.Edit_button.BackColor = System.Drawing.SystemColors.Control;
+            this.Edit_button.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.Edit_button, "Edit_button");
+            this.Edit_button.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.Edit_button.Name = "Edit_button";
+            this.Edit_button.UseVisualStyleBackColor = false;
+            this.Edit_button.Click += new System.EventHandler(this.Edit_button_Click);
+            // 
+            // DeleteTagbutton
+            // 
+            this.DeleteTagbutton.BackColor = System.Drawing.SystemColors.Control;
+            this.DeleteTagbutton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.DeleteTagbutton, "DeleteTagbutton");
+            this.DeleteTagbutton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.DeleteTagbutton.Name = "DeleteTagbutton";
+            this.DeleteTagbutton.UseVisualStyleBackColor = false;
+            this.DeleteTagbutton.Click += new System.EventHandler(this.DeleteTagbutton_Click);
+            // 
+            // addtag_button
+            // 
+            this.addtag_button.BackColor = System.Drawing.SystemColors.Control;
+            this.addtag_button.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.addtag_button, "addtag_button");
+            this.addtag_button.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.addtag_button.Name = "addtag_button";
+            this.addtag_button.UseVisualStyleBackColor = false;
+            this.addtag_button.Click += new System.EventHandler(this.Addtag_button_Click);
+            // 
             // TagsList
             // 
-            resources.ApplyResources(this.TagsList, "TagsList");
             this.TagsList.FormattingEnabled = true;
+            resources.ApplyResources(this.TagsList, "TagsList");
             this.TagsList.Name = "TagsList";
             this.TagsList.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             // 
             // groupBox2
             // 
-            resources.ApplyResources(this.groupBox2, "groupBox2");
+            this.groupBox2.BackColor = System.Drawing.Color.Transparent;
             this.groupBox2.Controls.Add(this.FindPicturePath_button);
             this.groupBox2.Controls.Add(this.Path_label);
             this.groupBox2.Controls.Add(this.Path_textBox3);
+            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
@@ -108,19 +160,27 @@
             // 
             resources.ApplyResources(this.openFileDialog1, "openFileDialog1");
             // 
+            // ButtonsgroupBox
+            // 
+            this.ButtonsgroupBox.Controls.Add(this.Back_button);
+            this.ButtonsgroupBox.Controls.Add(this.OK_button);
+            resources.ApplyResources(this.ButtonsgroupBox, "ButtonsgroupBox");
+            this.ButtonsgroupBox.Name = "ButtonsgroupBox";
+            this.ButtonsgroupBox.TabStop = false;
+            // 
             // UploadWindow
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.ButtonsgroupBox);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.Back_button);
-            this.Controls.Add(this.OK_button);
             this.Name = "UploadWindow";
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.ButtonsgroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -136,5 +196,10 @@
         private System.Windows.Forms.Button FindPicturePath_button;
         protected internal System.Windows.Forms.ListBox TagsList;
         protected internal System.Windows.Forms.TextBox Path_textBox3;
+        private System.Windows.Forms.Button addtag_button;
+        private System.Windows.Forms.GroupBox ButtonsgroupBox;
+        private System.Windows.Forms.Button DeleteTagbutton;
+        private System.Windows.Forms.Button Edit_button;
+        private System.Windows.Forms.Button EditNameTagbutton;
     }
 }

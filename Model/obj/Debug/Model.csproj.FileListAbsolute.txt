@@ -15,3 +15,4 @@ C:\Users\George\Source\Repos\PicturesStore\Model\obj\Debug\Model.csproj.CopyComp
 C:\Users\George\Source\Repos\PicturesStore\Model\obj\Debug\Model.dll
 C:\Users\George\Source\Repos\PicturesStore\Model\obj\Debug\Model.pdb
 C:\Users\George\Source\Repos\PicturesStore\Model\bin\Debug\uk\GUI.resources.dll
+C:\Users\George\Source\Repos\PicturesStore\Model\bin\Debug\hsb\GUI.resources.dll
