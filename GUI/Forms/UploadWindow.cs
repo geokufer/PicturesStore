@@ -12,9 +12,11 @@ namespace PicturesStorage
 {
     public partial class UploadWindow : Form
     {
+        private bool isEditingTagsList = true;
         public UploadWindow()
         {
             InitializeComponent();
+            ShowEditTagsButtons(false);
         }
 
         private void FindPicturePath_button_Click(object sender, EventArgs e)
@@ -52,7 +54,33 @@ namespace PicturesStorage
 
         private void Edit_button_Click(object sender, EventArgs e)
         {
+            if (isEditingTagsList)
+            {
+                OK_button.Enabled = false;
+                ShowEditTagsButtons(true);
+                isEditingTagsList = false;
+            }
+            else
+            {
+                OK_button.Enabled = true;
+                ShowEditTagsButtons(false);
+                isEditingTagsList = true;
+            }
+        }
 
+        private void OK_button_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Back_button_Click(object sender, EventArgs e)
+        {
+            ShowEditTagsButtons(false);
+        }
+
+        void ShowEditTagsButtons(bool flag)
+        {
+            addtag_button.Visible = DeleteTagbutton.Visible = EditNameTagbutton.Visible = flag;
         }
     }
 }

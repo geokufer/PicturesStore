@@ -16,18 +16,16 @@ namespace GUI
 {
     public class ViewManager : IViewController, IViewModel
     {
-        private StartWindow startWindow = null;
-        private FindWindow findWindow = null;
-        private UploadWindow uploadWindow = null;
-
-        
         public static string LanguageProperty = Properties.Settings.Default.Language;
         public static int ThemeProperty = Properties.Settings.Default.Theme;
 
+        private StartWindow startWindow = null;
+        private FindWindow findWindow = null;
+        private UploadWindow uploadWindow = null;
+        
         public event LoadPictureInformation LoadPictureInfo;
         public event AddPictureInformation AddPictureInfo;
         public event LoadPicturePathesByTags queryToPictureByTags;
-
         public ViewManager()
         {
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(LanguageProperty);
@@ -143,20 +141,19 @@ namespace GUI
         }
         #endregion
 
-        #region Upload form handlers
+        #region IViewController realisation
+        public void LoadGUI()
+        {
+            LoadPictureInfo();
+            Application.Run(startWindow);
+        }
         private List<string> queryForPicturePathes(List<string> pathes)
         {
             return queryToPictureByTags(pathes);
         }
         #endregion
 
-
-        public void LoadGUI()
-        {
-            LoadPictureInfo();
-            Application.Run(startWindow);
-        }
-
+        #region IViewModel realisation
         public void GetPictureInfo()
         {
 
@@ -170,7 +167,7 @@ namespace GUI
             findWindow.UploadTags(tags);
             uploadWindow.UploadTags(tags);
         }
-
+        #endregion
 
         #region Change language on programm run (not work correctly=> Control.ControlCollection doesn't have all form elements)
         //static List<Form> forms = new List<Form>();

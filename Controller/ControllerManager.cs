@@ -26,6 +26,11 @@ namespace Controller
 
         private List<string> getPicturesByTags(List<string> tags)
         {
+            if (tags == null || tags.Count == 0)
+            {
+                throw new ArgumentException("Tags list is empty or argument null");
+            }
+
             return model.GetPicturesPathes(tags);
         }
 

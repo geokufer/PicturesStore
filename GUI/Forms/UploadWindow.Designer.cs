@@ -56,6 +56,7 @@
             this.OK_button.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.OK_button.Name = "OK_button";
             this.OK_button.UseVisualStyleBackColor = false;
+            this.OK_button.Click += new System.EventHandler(this.OK_button_Click);
             // 
             // Back_button
             // 
@@ -65,6 +66,7 @@
             this.Back_button.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Back_button.Name = "Back_button";
             this.Back_button.UseVisualStyleBackColor = false;
+            this.Back_button.Click += new System.EventHandler(this.Back_button_Click);
             // 
             // groupBox1
             // 
@@ -82,7 +84,6 @@
             // EditNameTagbutton
             // 
             this.EditNameTagbutton.BackColor = System.Drawing.SystemColors.Control;
-            this.EditNameTagbutton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.EditNameTagbutton, "EditNameTagbutton");
             this.EditNameTagbutton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.EditNameTagbutton.Name = "EditNameTagbutton";
@@ -92,7 +93,6 @@
             // Edit_button
             // 
             this.Edit_button.BackColor = System.Drawing.SystemColors.Control;
-            this.Edit_button.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.Edit_button, "Edit_button");
             this.Edit_button.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Edit_button.Name = "Edit_button";
@@ -102,7 +102,6 @@
             // DeleteTagbutton
             // 
             this.DeleteTagbutton.BackColor = System.Drawing.SystemColors.Control;
-            this.DeleteTagbutton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.DeleteTagbutton, "DeleteTagbutton");
             this.DeleteTagbutton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.DeleteTagbutton.Name = "DeleteTagbutton";
@@ -112,7 +111,6 @@
             // addtag_button
             // 
             this.addtag_button.BackColor = System.Drawing.SystemColors.Control;
-            this.addtag_button.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.addtag_button, "addtag_button");
             this.addtag_button.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.addtag_button.Name = "addtag_button";
@@ -162,6 +160,7 @@
             // 
             // ButtonsgroupBox
             // 
+            this.ButtonsgroupBox.BackColor = System.Drawing.Color.Transparent;
             this.ButtonsgroupBox.Controls.Add(this.Back_button);
             this.ButtonsgroupBox.Controls.Add(this.OK_button);
             resources.ApplyResources(this.ButtonsgroupBox, "ButtonsgroupBox");

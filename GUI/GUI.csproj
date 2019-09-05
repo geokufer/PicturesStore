@@ -44,6 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\EditNameWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EditNameWindow.Designer.cs">
+      <DependentUpon>EditNameWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Interfaces\IViewController.cs" />
     <Compile Include="Interfaces\IViewModel.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -79,6 +85,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\EditNameWindow.resx">
+      <DependentUpon>EditNameWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FindWindow.resx">
       <DependentUpon>FindWindow.cs</DependentUpon>
     </EmbeddedResource>
