@@ -34,7 +34,7 @@ namespace Controller
             return model.GetPicturesPathes(e.Tags);
         }
 
-        private bool AddPictureInfoToDB(object o, AddNewPictureInfoEventArgs e)
+        private bool AddPictureInfoToDB(object o, PictureInfoEventArgs e)
         {
             if (string.IsNullOrEmpty(e.Path) || e.Tags.Count == 0)
             {

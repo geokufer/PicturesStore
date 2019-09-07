@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.NameTextBox = new System.Windows.Forms.TextBox();
             this.Cancel_button = new System.Windows.Forms.Button();
             this.OK_button = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
@@ -37,7 +37,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.NameTextBox);
             this.groupBox1.Controls.Add(this.Cancel_button);
             this.groupBox1.Controls.Add(this.OK_button);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -48,13 +48,13 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Edit name";
             // 
-            // textBox1
+            // NameTextBox
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox1.Location = new System.Drawing.Point(6, 29);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(466, 30);
-            this.textBox1.TabIndex = 2;
+            this.NameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.NameTextBox.Location = new System.Drawing.Point(6, 29);
+            this.NameTextBox.Name = "NameTextBox";
+            this.NameTextBox.Size = new System.Drawing.Size(466, 30);
+            this.NameTextBox.TabIndex = 2;
             // 
             // Cancel_button
             // 
@@ -75,7 +75,6 @@
             this.OK_button.TabIndex = 0;
             this.OK_button.Text = "OK";
             this.OK_button.UseVisualStyleBackColor = true;
-            this.OK_button.Click += new System.EventHandler(this.OK_button_Click);
             // 
             // EditNameWindow
             // 
@@ -85,7 +84,8 @@
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "EditNameWindow";
-            this.Text = "EditNameWindow";
+            this.Text = "Edit";
+            this.Activated += new System.EventHandler(this.EditNameWindow_Activated);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -97,6 +97,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button Cancel_button;
         private System.Windows.Forms.Button OK_button;
-        private System.Windows.Forms.TextBox textBox1;
+        internal System.Windows.Forms.TextBox NameTextBox;
     }
 }

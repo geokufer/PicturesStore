@@ -23,9 +23,15 @@ namespace GUI
         private FindWindow findWindow = null;
         private UploadWindow uploadWindow = null;
 
-        public event AddNewPictureInfoEventHandler AddPictureInfo;
+
         public event LoadPicturesInfoEventHandler LoadPicturesInfo;
         public event LoadPicturePathesByTagsEventHandler GetPicturePathesByTags;
+        public event OnPictureInfoChangeEventHandler AddPictureInfo;
+        public event OnPictureInfoChangeEventHandler DeletePicture;
+
+        public event OnTagInfoChangeEventHandler AddTag;
+        public event OnTagInfoChangeEventHandler ChangeTagName;
+        public event OnTagInfoChangeEventHandler DeleteTag;
 
         public ViewManager()
         {
@@ -36,7 +42,7 @@ namespace GUI
         {
             startWindow = new StartWindow();
             findWindow = new FindWindow(GetPicturePathesByTags);
-            uploadWindow = new UploadWindow();
+            uploadWindow = new UploadWindow(AddTag, ChangeTagName, DeleteTag);
 
             startWindow.LanguageChange += languageChangeEventHandler;
             startWindow.WindowCalled += windowLoadEventHandler;
@@ -69,6 +75,7 @@ namespace GUI
             startWindow.BackgroundImage = backgroungImage;
             findWindow.BackgroundImage = backgroungImage;
             uploadWindow.BackgroundImage = backgroungImage;
+            uploadWindow.EditNameWindow.BackgroundImage = backgroungImage;
         }
         private void languageChangeEventHandler(Language language)
         {
@@ -116,7 +123,7 @@ namespace GUI
                         }
 
                         if (AddPictureInfo(this, 
-                            new AddNewPictureInfoEventArgs(uploadWindow.Path_textBox3.Text, selectedTags)))
+                            new PictureInfoEventArgs(uploadWindow.Path_textBox3.Text, selectedTags)))
                         {
                             MessageBox.Show("Picture added successfully");
                         }

@@ -17,9 +17,10 @@ namespace GUI.Forms
             InitializeComponent();
         }
 
-        private void OK_button_Click(object sender, EventArgs e)
+        private void EditNameWindow_Activated(object sender, EventArgs e)
         {
-
+            NameTextBox.Focus();
+            NameTextBox.SelectAll();
         }
     }
 }
