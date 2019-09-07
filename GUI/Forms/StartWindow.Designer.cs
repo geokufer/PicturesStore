@@ -134,6 +134,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.Find_button);
             this.Controls.Add(this.Load_button);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "StartWindow";
             this.menuStrip1.ResumeLayout(false);

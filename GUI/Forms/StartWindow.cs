@@ -1,27 +1,18 @@
 ﻿using GUI;
 using System;
 using System.Windows.Forms;
-using GUI.Properties;
-using System.Threading;
-using System.Globalization;
-using System.Resources;
-using System.ComponentModel;
 
 namespace PicturesStorage
 {
-    public delegate void OnLanguageChange(Language language);
-    public delegate void OnThemeChange(Theme theme);
-    public delegate void OnWindowCalled(Windows window);
+    public delegate void OnLanguageChangeEventHandler(Language language);
+    public delegate void OnThemeChangeEventHandler(Theme theme);
+    public delegate void OnWindowCalledEventHandler(Windows window);
 
     public partial class StartWindow : Form 
     {
-
-        public event OnLanguageChange LanguageChange;
-        public event OnThemeChange ThemeChange;
-        public event OnWindowCalled WindowCalled;
-
-        
-
+        public event OnLanguageChangeEventHandler LanguageChange;
+        public event OnThemeChangeEventHandler ThemeChange;
+        public event OnWindowCalledEventHandler WindowCalled;
         public StartWindow()
         {
             InitializeComponent();

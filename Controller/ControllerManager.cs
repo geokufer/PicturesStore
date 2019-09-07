@@ -19,22 +19,29 @@ namespace Controller
             view = new ViewManager();
             model = ModelManager.GetInstatnce(view as ViewManager);
 
-            view.LoadPictureInfo += getPicturesInfoFromDB;
-            view.AddPictureInfo += AddPictureInfo;
-            view.queryToPictureByTags += getPicturesByTags;
+            view.LoadPicturesInfo += getPicturesInfoFromDB;
+            view.AddPictureInfo += AddPictureInfoToDB;
+            view.GetPicturePathesByTags += getPicturesByTags;
         }
 
-        private List<string> getPicturesByTags(List<string> tags)
+        private List<string> getPicturesByTags(object o, LoadPicturePathesByTagsEventArgs e)
         {
-            if (tags == null || tags.Count == 0)
+            if (e.Tags == null || e.Tags.Count == 0)
             {
                 throw new ArgumentException("Tags list is empty or argument null");
             }
 
-            return model.GetPicturesPathes(tags);
+            return model.GetPicturesPathes(e.Tags);
         }
 
-        private bool AddPictureInfo(string path, List<string> selectedTags) => model.AddPictureToDB(path, selectedTags);
+        private bool AddPictureInfoToDB(object o, AddNewPictureInfoEventArgs e)
+        {
+            if (string.IsNullOrEmpty(e.Path) || e.Tags.Count == 0)
+            {
+                throw new ArgumentException("Tags list is empty or argument null");
+            }
+            return model.AddPictureToDB(e.Path, e.Tags);
+        }
 
         private void getPicturesInfoFromDB()
         {

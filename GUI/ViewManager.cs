@@ -10,60 +10,59 @@ using System.Threading;
 using System.ComponentModel;
 using System.Globalization;
 using System.Drawing;
-
+using GUI.Properties;
 
 namespace GUI
 {
     public class ViewManager : IViewController, IViewModel
     {
-        public static string LanguageProperty = Properties.Settings.Default.Language;
-        public static int ThemeProperty = Properties.Settings.Default.Theme;
+        public static string LanguageProperty = Settings.Default.Language;
+        public static int ThemeProperty = Settings.Default.Theme;
 
         private StartWindow startWindow = null;
         private FindWindow findWindow = null;
         private UploadWindow uploadWindow = null;
-        
-        public event LoadPictureInformation LoadPictureInfo;
-        public event AddPictureInformation AddPictureInfo;
-        public event LoadPicturePathesByTags queryToPictureByTags;
+
+        public event AddNewPictureInfoEventHandler AddPictureInfo;
+        public event LoadPicturesInfoEventHandler LoadPicturesInfo;
+        public event LoadPicturePathesByTagsEventHandler GetPicturePathesByTags;
+
         public ViewManager()
         {
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(LanguageProperty);
-
-            startWindow = new StartWindow();
-            findWindow = new FindWindow();
-            uploadWindow = new UploadWindow();
-
-            themeChangeHandler((Theme)ThemeProperty);
-
-            startWindow.LanguageChange += languageChangeHandler;
-            startWindow.WindowCalled += windowCallHandler;
-            startWindow.ThemeChange += themeChangeHandler;
-
-            findWindow.LoadPicturePathes += queryForPicturePathes;
         }
 
-        #region Start form event's handlers
-        //Main form event's handlers//
-        private void themeChangeHandler(Theme theme)
+        private void InitWindowsForm()
+        {
+            startWindow = new StartWindow();
+            findWindow = new FindWindow(GetPicturePathesByTags);
+            uploadWindow = new UploadWindow();
+
+            startWindow.LanguageChange += languageChangeEventHandler;
+            startWindow.WindowCalled += windowLoadEventHandler;
+            startWindow.ThemeChange += themeChangeEventHandler;
+        }
+
+        #region Event's handlers from "Start form"
+        private void themeChangeEventHandler(Theme theme)
         {
             switch (theme)
             {
                 case Theme.Brick:
-                    themeChange(Properties.Resources.brick);
+                    themeChange(Resources.brick);
                     ThemeProperty = (int)Theme.Brick;
                     break;
                 case Theme.Navy:
-                    themeChange(Properties.Resources.navy);
+                    themeChange(Resources.navy);
                     ThemeProperty = (int)Theme.Navy;
                     break;
                 case Theme.Frog:
-                    themeChange(Properties.Resources.frog);
+                    themeChange(Resources.frog);
                     ThemeProperty = (int)Theme.Frog;
                     break;
             }
-            Properties.Settings.Default.Theme = ThemeProperty;
-            Properties.Settings.Default.Save();
+            Settings.Default.Theme = ThemeProperty;
+            Settings.Default.Save();
         }
         private void themeChange(Bitmap backgroungImage)
         {
@@ -71,7 +70,7 @@ namespace GUI
             findWindow.BackgroundImage = backgroungImage;
             uploadWindow.BackgroundImage = backgroungImage;
         }
-        private void languageChangeHandler(Language language)
+        private void languageChangeEventHandler(Language language)
         {
             if (MessageBox.Show("For language change restart application required." +
                 "\nChange language?",
@@ -90,12 +89,12 @@ namespace GUI
                     LanguageProperty = "uk-UA";
                     break;
             }
-            Properties.Settings.Default.Language = LanguageProperty;
-            Properties.Settings.Default.Save();
+            Settings.Default.Language = LanguageProperty;
+            Settings.Default.Save();
         }
-        private void windowCallHandler(Windows window)
+        private void windowLoadEventHandler(Windows window)
         {
-            LoadPictureInfo();
+            LoadPicturesInfo();
 
             switch (window)
             {
@@ -116,7 +115,8 @@ namespace GUI
                             selectedTags.Add(item);
                         }
 
-                        if (AddPictureInfo(uploadWindow.Path_textBox3.Text, selectedTags))
+                        if (AddPictureInfo(this, 
+                            new AddNewPictureInfoEventArgs(uploadWindow.Path_textBox3.Text, selectedTags)))
                         {
                             MessageBox.Show("Picture added successfully");
                         }
@@ -144,12 +144,10 @@ namespace GUI
         #region IViewController realisation
         public void LoadGUI()
         {
-            LoadPictureInfo();
+            InitWindowsForm();
+            themeChangeEventHandler((Theme)ThemeProperty);
+            LoadPicturesInfo();
             Application.Run(startWindow);
-        }
-        private List<string> queryForPicturePathes(List<string> pathes)
-        {
-            return queryToPictureByTags(pathes);
         }
         #endregion
 

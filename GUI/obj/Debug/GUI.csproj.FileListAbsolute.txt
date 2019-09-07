@@ -18,3 +18,4 @@ C:\Users\George\Source\Repos\PicturesStore\GUI\obj\Debug\GUI.Properties.Resource
 C:\Users\George\Source\Repos\PicturesStore\GUI\bin\Debug\hsb\GUI.resources.dll
 C:\Users\George\Source\Repos\PicturesStore\GUI\obj\Debug\PicturesStorage.UploadWindow.hsb.resources
 C:\Users\George\Source\Repos\PicturesStore\GUI\obj\Debug\hsb\GUI.resources.dll
+C:\Users\George\Source\Repos\PicturesStore\GUI\obj\Debug\GUI.Forms.EditNameWindow.resources

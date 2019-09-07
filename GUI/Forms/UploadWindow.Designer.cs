@@ -175,6 +175,7 @@
             this.Controls.Add(this.ButtonsgroupBox);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "UploadWindow";
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);

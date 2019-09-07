@@ -8,15 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using GUI;
 
 namespace PicturesStorage
 {
-    public delegate List<string> LoadPicturePathesByTags (List<string> pathes);
+    //public delegate List<string> LoadPicturePathesByTags (List<string> pathes);
     public partial class FindWindow : Form
     {
-        public event LoadPicturePathesByTags LoadPicturePathes;
-        public FindWindow()
+        LoadPicturePathesByTagsEventHandler GetPicturePathesByTags;
+
+        public FindWindow(LoadPicturePathesByTagsEventHandler GetPicturePathesByTags)
         {
+            this.GetPicturePathesByTags = GetPicturePathesByTags
+                ?? throw new ArgumentNullException(nameof(LoadPicturePathesByTagsEventHandler)); ;
+
             InitializeComponent();
         }
 
@@ -46,7 +51,6 @@ namespace PicturesStorage
                 return;
             }
 
-
             List<string> tags = new List<string>();
             foreach (string item in TagsList.SelectedItems)
             {
@@ -54,7 +58,7 @@ namespace PicturesStorage
             }
 
             //event to load pictures by tag from db
-            List<string> pathes = LoadPicturePathes(tags);
+            List<string> pathes = GetPicturePathesByTags(this, new LoadPicturePathesByTagsEventArgs(tags));
             if (pathes == null)
             {
                 MessageBox.Show("Failed to load pathes");
