@@ -12,15 +12,17 @@ using GUI;
 
 namespace PicturesStorage
 {
-    //public delegate List<string> LoadPicturePathesByTags (List<string> pathes);
     public partial class FindWindow : Form
     {
-        LoadPicturePathesByTagsEventHandler GetPicturePathesByTags;
+        readonly LoadPicturePathesByTagsEventHandler GetPicturePathesByTags;
+        readonly OnPictureInfoChangeEventHandler PictureInfoChange;
 
-        public FindWindow(LoadPicturePathesByTagsEventHandler GetPicturePathesByTags)
+        public FindWindow(LoadPicturePathesByTagsEventHandler GetPicturePathesByTags, OnPictureInfoChangeEventHandler PictureInfoChange)
         {
             this.GetPicturePathesByTags = GetPicturePathesByTags
-                ?? throw new ArgumentNullException(nameof(LoadPicturePathesByTagsEventHandler)); ;
+                ?? throw new ArgumentNullException(nameof(LoadPicturePathesByTagsEventHandler));
+            this.PictureInfoChange = PictureInfoChange 
+                ?? throw new ArgumentNullException(nameof(PictureInfoChange));
 
             InitializeComponent();
         }
@@ -40,7 +42,6 @@ namespace PicturesStorage
             {
                 MessageBox.Show(exception.Message);
             }
-           
         }
 
         private void FindButton_Click(object sender, EventArgs e)
@@ -67,6 +68,35 @@ namespace PicturesStorage
             //show picture pathes in listbox
             Pathes_listBox.DataSource = pathes;
             //TODO end flow of load pathes
+        }
+
+        private void DeletePictureButton_Click(object sender, EventArgs e)
+        {
+            string picturePathToDelete;
+
+            if (Pathes_listBox.SelectedItems.Count == 1)
+            {
+                picturePathToDelete = Pathes_listBox.SelectedItem.ToString();
+            }
+            else
+            {
+                MessageBox.Show("Select picture path to delete", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            
+            if (PictureInfoChange(this, new PictureInfoEventArgs(picturePathToDelete, PicturePathChangeOperation.Delete)))
+            {
+                MessageBox.Show("Picture delete successfully", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Failed to delete tag", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void LoadPicturePathes(List<string> pathes)
+        {
+            Pathes_listBox.DataSource = pathes;
         }
     }
 }

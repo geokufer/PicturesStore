@@ -15,8 +15,7 @@ namespace GUI
     public interface IViewController
     {
         void LoadGUI();
-        event OnPictureInfoChangeEventHandler AddPictureInfo;
-        event OnPictureInfoChangeEventHandler DeletePicture;
+        event OnPictureInfoChangeEventHandler PictureInfoChange;
         event LoadPicturesInfoEventHandler LoadPicturesInfo;
         event LoadPicturePathesByTagsEventHandler GetPicturePathesByTags;
         //tag events
@@ -37,15 +36,18 @@ namespace GUI
     {
         public string Path;
         public List<string> Tags;
+        public PicturePathChangeOperation operation;
 
-        public PictureInfoEventArgs(string path)
+        public PictureInfoEventArgs(string path, PicturePathChangeOperation operation)
         {
             Path = path ?? throw new ArgumentNullException(nameof(path));
+            this.operation = operation;
         }
-        public PictureInfoEventArgs(string path, List<string> tags)
+        public PictureInfoEventArgs(string path, List<string> tags, PicturePathChangeOperation operation)
         {
             Path = path ?? throw new ArgumentNullException(nameof(path));
             Tags = tags ?? throw new ArgumentNullException(nameof(tags));
+            this.operation = operation;
         }
     }
 
@@ -76,6 +78,12 @@ namespace GUI
     {
         Add,
         Edit,
+        Delete
+    }
+
+    public enum PicturePathChangeOperation
+    {
+        Add,
         Delete
     }
 }

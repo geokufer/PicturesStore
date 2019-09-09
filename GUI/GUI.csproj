@@ -88,6 +88,9 @@
     <EmbeddedResource Include="Forms\EditNameWindow.resx">
       <DependentUpon>EditNameWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EditNameWindow.uk-UA.resx">
+      <DependentUpon>EditNameWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FindWindow.resx">
       <DependentUpon>FindWindow.cs</DependentUpon>
     </EmbeddedResource>

@@ -20,11 +20,11 @@ namespace PicturesStorage
 
         public UploadWindow(OnTagInfoChangeEventHandler TagInfoChange)
         {
-            this.TagInfoChange = TagInfoChange;
+            this.TagInfoChange = TagInfoChange 
+                ?? throw new ArgumentNullException(nameof(OnTagInfoChangeEventHandler));
             InitializeComponent();
             ShowEditTagsButtons(false);
         }
-
 
         private void FindPicturePath_button_Click(object sender, EventArgs e)
         {
@@ -56,8 +56,7 @@ namespace PicturesStorage
                 return;
             }
 
-            if (TagInfoChange != null
-                && TagInfoChange(this, new TagInfoEventArgs(EditNameWindow.NameTextBox.Text,TagInfoChangeOperation.Add)))
+            if (TagInfoChange(this, new TagInfoEventArgs(EditNameWindow.NameTextBox.Text,TagInfoChangeOperation.Add)))
             {
                 MessageBox.Show("Tag added successfully", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -93,8 +92,7 @@ namespace PicturesStorage
             tagName = TagsList.SelectedItem.ToString();
             newTagName = EditNameWindow.NameTextBox.Text;
 
-            if (TagInfoChange != null &&
-                TagInfoChange(this, new TagInfoEventArgs(
+            if (TagInfoChange(this, new TagInfoEventArgs(
                 tagName,
                 newTagName,
                 TagInfoChangeOperation.Edit)))
@@ -114,8 +112,7 @@ namespace PicturesStorage
                 MessageBox.Show("Select one tag to delete", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            if (TagInfoChange != null &&
-                TagInfoChange(this, new TagInfoEventArgs(
+            if (TagInfoChange(this, new TagInfoEventArgs(
                     TagsList.SelectedItem.ToString(),
                     TagInfoChangeOperation.Delete)))
             {

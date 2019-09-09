@@ -11,42 +11,44 @@ namespace Controller
 {
     public class ControllerManager
     {
-        private IViewController view;
-        private ModelManager model;
+        private readonly IViewController view;
+        private readonly ModelManager model;
 
         public ControllerManager()
         {
             view = new ViewManager();
             model = ModelManager.GetInstatnce(view as ViewManager);
 
-            view.LoadPicturesInfo += getPicturesInfoFromDB;
-            view.AddPictureInfo += AddPictureInfoToDB;
-            view.GetPicturePathesByTags += getPicturesByTags;
+            view.LoadPicturesInfo += GetPicturesInfoFromDB;
+            view.PictureInfoChange += PictureInfoChange;
+            view.GetPicturePathesByTags += GetPicturesByTags;
             view.TagInfoChange += TagInfoChangeEventHandler;
         }
 
         private bool TagInfoChangeEventHandler(object sender, TagInfoEventArgs e)
         {
+            bool operationResult = false;
             switch (e.Operation)
             {
                 case TagInfoChangeOperation.Add:
-                    if (!model.AddTagToDB(e.Name))
-                        return false;
+                    operationResult = model.AddTagToDB(e.Name);
                     break;
                 case TagInfoChangeOperation.Edit:
-                    if (!model.EditTagInDB(e.Name,e.NewNameForEdit))
-                        return false;
+                    operationResult = model.EditTagInDB(e.Name,e.NewNameForEdit);
                     break;
                 case TagInfoChangeOperation.Delete:
-                    if (!model.DeleteTagFromDB(e.Name))
-                        return false;
+                    operationResult = model.DeleteTagFromDB(e.Name);
                     break;
             }
-            model.GetTagsFromDB();
-            return true;
+
+            if (operationResult)
+            {
+                model.GetTagsFromDB();
+            }
+            return operationResult;
         }
 
-        private List<string> getPicturesByTags(object o, LoadPicturePathesByTagsEventArgs e)
+        private List<string> GetPicturesByTags(object o, LoadPicturePathesByTagsEventArgs e)
         {
             if (e.Tags == null || e.Tags.Count == 0)
             {
@@ -56,16 +58,36 @@ namespace Controller
             return model.GetPicturesPathes(e.Tags);
         }
 
-        private bool AddPictureInfoToDB(object o, PictureInfoEventArgs e)
+        private bool PictureInfoChange(object o, PictureInfoEventArgs e)
         {
-            if (string.IsNullOrEmpty(e.Path) || e.Tags.Count == 0)
+            bool operationResult = false;
+
+            switch (e.operation)
             {
-                throw new ArgumentException("Tags list is empty or argument null");
+                case PicturePathChangeOperation.Add:
+                    if (string.IsNullOrEmpty(e.Path) || e.Tags.Count == 0)
+                    {
+                        throw new ArgumentException("Tags list is empty or argument null");
+                    }
+                    operationResult = model.AddPictureToDB(e.Path, e.Tags);
+                    break;
+                case PicturePathChangeOperation.Delete:
+                    if (string.IsNullOrEmpty(e.Path))
+                    {
+                        throw new ArgumentException("Tags list is empty or argument null");
+                    }
+                    operationResult = model.DeletePictureFromDB(e.Path);
+                    break;
             }
-            return model.AddPictureToDB(e.Path, e.Tags);
+
+            if (operationResult)
+            {
+                model.GetPicturesPathesToView();
+            }
+            return operationResult;
         }
 
-        private void getPicturesInfoFromDB()
+        private void GetPicturesInfoFromDB()
         {
             model.GetTagsFromDB();
             model.GetPicturesPathesToView();

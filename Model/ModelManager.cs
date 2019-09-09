@@ -13,8 +13,8 @@ namespace Model
     public class ModelManager
     {
         const string DBName = "PictureInfoDB";
-        private static object lockObject = new object();
-        IViewModel view;
+        private static readonly object lockObject = new object();
+        private readonly IViewModel view;
         private static ModelManager modelManager;
 
 
@@ -91,6 +91,22 @@ namespace Model
                 using (PictureInfoDB db = new PictureInfoDB(DBName))
                 {
                     db.DeleteTag(db.GetTag(name));
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool DeletePictureFromDB(string path)
+        {
+            try
+            {
+                using (PictureInfoDB db = new PictureInfoDB(DBName))
+                {
+                    db.DeletePicture(db.GetPicture(path));
                 }
             }
             catch (Exception)

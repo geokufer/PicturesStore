@@ -23,11 +23,9 @@ namespace GUI
         private FindWindow findWindow = null;
         private UploadWindow uploadWindow = null;
 
-
         public event LoadPicturesInfoEventHandler LoadPicturesInfo;
         public event LoadPicturePathesByTagsEventHandler GetPicturePathesByTags;
-        public event OnPictureInfoChangeEventHandler AddPictureInfo;
-        public event OnPictureInfoChangeEventHandler DeletePicture;
+        public event OnPictureInfoChangeEventHandler PictureInfoChange;
         public event OnTagInfoChangeEventHandler TagInfoChange;
 
         public ViewManager()
@@ -38,43 +36,43 @@ namespace GUI
         private void InitWindowsForm()
         {
             startWindow = new StartWindow();
-            findWindow = new FindWindow(GetPicturePathesByTags);
+            findWindow = new FindWindow(GetPicturePathesByTags, PictureInfoChange);
             uploadWindow = new UploadWindow(TagInfoChange);
 
-            startWindow.LanguageChange += languageChangeEventHandler;
-            startWindow.WindowCalled += windowLoadEventHandler;
-            startWindow.ThemeChange += themeChangeEventHandler;
+            startWindow.LanguageChange += LanguageChangeEventHandler;
+            startWindow.WindowCalled += WindowLoadEventHandler;
+            startWindow.ThemeChange += ThemeChangeEventHandler;
         }
 
         #region Event's handlers from "Start form"
-        private void themeChangeEventHandler(Theme theme)
+        private void ThemeChangeEventHandler(Theme theme)
         {
             switch (theme)
             {
                 case Theme.Brick:
-                    themeChange(Resources.brick);
+                    ThemeChange(Resources.brick);
                     ThemeProperty = (int)Theme.Brick;
                     break;
                 case Theme.Navy:
-                    themeChange(Resources.navy);
+                    ThemeChange(Resources.navy);
                     ThemeProperty = (int)Theme.Navy;
                     break;
                 case Theme.Frog:
-                    themeChange(Resources.frog);
+                    ThemeChange(Resources.frog);
                     ThemeProperty = (int)Theme.Frog;
                     break;
             }
             Settings.Default.Theme = ThemeProperty;
             Settings.Default.Save();
         }
-        private void themeChange(Bitmap backgroungImage)
+        private void ThemeChange(Bitmap backgroungImage)
         {
             startWindow.BackgroundImage = backgroungImage;
             findWindow.BackgroundImage = backgroungImage;
             uploadWindow.BackgroundImage = backgroungImage;
             uploadWindow.EditNameWindow.BackgroundImage = backgroungImage;
         }
-        private void languageChangeEventHandler(Language language)
+        private void LanguageChangeEventHandler(Language language)
         {
             if (MessageBox.Show("For language change restart application required." +
                 "\nChange language?",
@@ -96,14 +94,15 @@ namespace GUI
             Settings.Default.Language = LanguageProperty;
             Settings.Default.Save();
         }
-        private void windowLoadEventHandler(Windows window)
+        private void WindowLoadEventHandler(Windows window)
         {
             LoadPicturesInfo();
 
             switch (window)
             {
                 case Windows.UploadWindow:
-                    if (uploadWindow.ShowDialog() == DialogResult.OK)
+                    startWindow.Hide();
+                    if (uploadWindow.ShowDialog(startWindow) == DialogResult.OK)
                     {
                         if (string.IsNullOrEmpty(uploadWindow.Path_textBox3.Text) ||
                             uploadWindow.TagsList.SelectedItems.Count < 1)
@@ -119,8 +118,8 @@ namespace GUI
                             selectedTags.Add(item);
                         }
 
-                        if (AddPictureInfo(this, 
-                            new PictureInfoEventArgs(uploadWindow.Path_textBox3.Text, selectedTags)))
+                        if (PictureInfoChange(this, 
+                            new PictureInfoEventArgs(uploadWindow.Path_textBox3.Text, selectedTags,PicturePathChangeOperation.Add)))
                         {
                             MessageBox.Show("Picture added successfully");
                         }
@@ -129,11 +128,14 @@ namespace GUI
                             MessageBox.Show("Picture added failed");
                         }
                     }
+                    startWindow.Show();
                     uploadWindow.Clear();
                     break;
 
                 case Windows.FindWindow:
-                    findWindow.ShowDialog();
+                    startWindow.Hide();
+                    findWindow.ShowDialog(startWindow);
+                    startWindow.Show();
                     break;
 
                 case Windows.None:
@@ -149,20 +151,21 @@ namespace GUI
         public void LoadGUI()
         {
             InitWindowsForm();
-            themeChangeEventHandler((Theme)ThemeProperty);
+            ThemeChangeEventHandler((Theme)ThemeProperty);
             LoadPicturesInfo();
             Application.Run(startWindow);
         }
         #endregion
 
         #region IViewModel realisation
-        public void GetPictureInfo()
-        {
-
-        }
         public void OnPicturePathUpdate(List<string> pathes)
         {
-            
+            if (pathes == null)
+            {
+                MessageBox.Show("Failed to load pathes");
+                return;
+            }
+            findWindow.LoadPicturePathes(pathes);
         }
         public void OnTagsNameUpdate(List<string> tags)
         {
