@@ -28,10 +28,7 @@ namespace GUI
         public event LoadPicturePathesByTagsEventHandler GetPicturePathesByTags;
         public event OnPictureInfoChangeEventHandler AddPictureInfo;
         public event OnPictureInfoChangeEventHandler DeletePicture;
-
-        public event OnTagInfoChangeEventHandler AddTag;
-        public event OnTagInfoChangeEventHandler ChangeTagName;
-        public event OnTagInfoChangeEventHandler DeleteTag;
+        public event OnTagInfoChangeEventHandler TagInfoChange;
 
         public ViewManager()
         {
@@ -42,7 +39,7 @@ namespace GUI
         {
             startWindow = new StartWindow();
             findWindow = new FindWindow(GetPicturePathesByTags);
-            uploadWindow = new UploadWindow(AddTag, ChangeTagName, DeleteTag);
+            uploadWindow = new UploadWindow(TagInfoChange);
 
             startWindow.LanguageChange += languageChangeEventHandler;
             startWindow.WindowCalled += windowLoadEventHandler;

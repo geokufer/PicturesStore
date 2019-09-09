@@ -22,6 +22,28 @@ namespace Controller
             view.LoadPicturesInfo += getPicturesInfoFromDB;
             view.AddPictureInfo += AddPictureInfoToDB;
             view.GetPicturePathesByTags += getPicturesByTags;
+            view.TagInfoChange += TagInfoChangeEventHandler;
+        }
+
+        private bool TagInfoChangeEventHandler(object sender, TagInfoEventArgs e)
+        {
+            switch (e.Operation)
+            {
+                case TagInfoChangeOperation.Add:
+                    if (!model.AddTagToDB(e.Name))
+                        return false;
+                    break;
+                case TagInfoChangeOperation.Edit:
+                    if (!model.EditTagInDB(e.Name,e.NewNameForEdit))
+                        return false;
+                    break;
+                case TagInfoChangeOperation.Delete:
+                    if (!model.DeleteTagFromDB(e.Name))
+                        return false;
+                    break;
+            }
+            model.GetTagsFromDB();
+            return true;
         }
 
         private List<string> getPicturesByTags(object o, LoadPicturePathesByTagsEventArgs e)
@@ -45,7 +67,7 @@ namespace Controller
 
         private void getPicturesInfoFromDB()
         {
-            model.GetTags();
+            model.GetTagsFromDB();
             model.GetPicturesPathesToView();
         }
 

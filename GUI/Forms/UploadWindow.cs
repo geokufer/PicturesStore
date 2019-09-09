@@ -15,19 +15,12 @@ namespace PicturesStorage
     public partial class UploadWindow : Form
     {
         private bool isEditingTagsList = true;
-        public event OnTagInfoChangeEventHandler AddTag;
-        public event OnTagInfoChangeEventHandler ChangeTagName;
-        public event OnTagInfoChangeEventHandler DeleteTag;
+        public event OnTagInfoChangeEventHandler TagInfoChange;
         internal readonly EditNameWindow EditNameWindow = new EditNameWindow();
 
-        public UploadWindow(
-            OnTagInfoChangeEventHandler AddTag,
-            OnTagInfoChangeEventHandler ChangeTagName,
-            OnTagInfoChangeEventHandler DeleteTag)
+        public UploadWindow(OnTagInfoChangeEventHandler TagInfoChange)
         {
-            this.AddTag = AddTag;
-            this.ChangeTagName = ChangeTagName;
-            this.DeleteTag = DeleteTag;
+            this.TagInfoChange = TagInfoChange;
             InitializeComponent();
             ShowEditTagsButtons(false);
         }
@@ -54,24 +47,31 @@ namespace PicturesStorage
         private void Addtag_button_Click(object sender, EventArgs e)
         {
             ClearTextBox();
+
             DialogResult result = EditNameWindow.ShowDialog(this);
 
             if (result == DialogResult.Cancel || string.IsNullOrEmpty(EditNameWindow.NameTextBox.Text))
-                return;
-
-            if (AddTag(this,new TagInfoEventArgs(EditNameWindow.NameTextBox.Text)))
             {
-                MessageBox.Show("Tag added successfully", "Information", MessageBoxButtons.OK,MessageBoxIcon.Information);
+                MessageBox.Show("Operation canceled", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (TagInfoChange != null
+                && TagInfoChange(this, new TagInfoEventArgs(EditNameWindow.NameTextBox.Text,TagInfoChangeOperation.Add)))
+            {
+                MessageBox.Show("Tag added successfully", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
                 MessageBox.Show("Failed to add tag", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
         private void EditNameTagbutton_Click(object sender, EventArgs e)
         {
+            string tagName;
+            string newTagName;
+
             if (TagsList.SelectedItems.Count != 1)
             {
                 MessageBox.Show("Select one tag to change name", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -90,9 +90,14 @@ namespace PicturesStorage
                 return;
             }
 
-            if (ChangeTagName(this, new TagInfoEventArgs(
-                TagsList.SelectedItem.ToString(),
-                EditNameWindow.NameTextBox.Text)))
+            tagName = TagsList.SelectedItem.ToString();
+            newTagName = EditNameWindow.NameTextBox.Text;
+
+            if (TagInfoChange != null &&
+                TagInfoChange(this, new TagInfoEventArgs(
+                tagName,
+                newTagName,
+                TagInfoChangeOperation.Edit)))
             {
                 MessageBox.Show("Tag edited successfully", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -105,10 +110,14 @@ namespace PicturesStorage
         private void DeleteTagbutton_Click(object sender, EventArgs e)
         {
             if (TagsList.SelectedItems.Count != 1)
+            {
                 MessageBox.Show("Select one tag to delete", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
-
-            if (DeleteTag(this, new TagInfoEventArgs(TagsList.SelectedItem.ToString())))
+            if (TagInfoChange != null &&
+                TagInfoChange(this, new TagInfoEventArgs(
+                    TagsList.SelectedItem.ToString(),
+                    TagInfoChangeOperation.Delete)))
             {
                 MessageBox.Show("Tag deleted successfully", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }

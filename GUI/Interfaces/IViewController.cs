@@ -20,9 +20,7 @@ namespace GUI
         event LoadPicturesInfoEventHandler LoadPicturesInfo;
         event LoadPicturePathesByTagsEventHandler GetPicturePathesByTags;
         //tag events
-        event OnTagInfoChangeEventHandler AddTag;
-        event OnTagInfoChangeEventHandler ChangeTagName;
-        event OnTagInfoChangeEventHandler DeleteTag;
+        event OnTagInfoChangeEventHandler TagInfoChange;
     }
 
     public class LoadPicturePathesByTagsEventArgs : EventArgs
@@ -54,20 +52,30 @@ namespace GUI
     public class TagInfoEventArgs : EventArgs
     {
         public string Name;
-        public string NewName;
+        public string NewNameForEdit;
+        public TagInfoChangeOperation Operation;
 
-        public TagInfoEventArgs(string name)
+        public TagInfoEventArgs(string name, TagInfoChangeOperation operation)
         {
             Name = name
                 ?? throw new ArgumentNullException(nameof(Name));
+            Operation = operation;
         }
 
-        public TagInfoEventArgs(string name, string newName) 
+        public TagInfoEventArgs(string oldName, string newName, TagInfoChangeOperation operation) 
         {
-            NewName = newName 
+            NewNameForEdit = newName 
                 ?? throw new ArgumentNullException(nameof(newName));
-            Name = name
-                ?? throw new ArgumentNullException(nameof(name));
+            Name = oldName
+                ?? throw new ArgumentNullException(nameof(oldName));
+            Operation = operation;
         }
+    }
+
+    public enum TagInfoChangeOperation
+    {
+        Add,
+        Edit,
+        Delete
     }
 }

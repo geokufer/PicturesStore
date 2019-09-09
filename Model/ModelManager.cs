@@ -42,8 +42,7 @@ namespace Model
             }
             return modelManager;
         }
-
-        public void GetTags()
+        public void GetTagsFromDB()
         {
             using (PictureInfoDB db = new PictureInfoDB(DBName))
             {
@@ -54,6 +53,51 @@ namespace Model
                 }
                 view.OnTagsNameUpdate(TagName);
             }
+        }
+        public bool AddTagToDB(string name)
+        {
+            try
+            {
+                using (PictureInfoDB db = new PictureInfoDB(DBName))
+                {
+                    db.AddTag(name);
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
+        public bool EditTagInDB(string name, string newNameForEdit)
+        {
+            try
+            {
+                using (PictureInfoDB db = new PictureInfoDB(DBName))
+                {
+                    db.ChangeTagName(db.GetTag(name), newNameForEdit);
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
+        public bool DeleteTagFromDB(string name)
+        {
+            try
+            {
+                using (PictureInfoDB db = new PictureInfoDB(DBName))
+                {
+                    db.DeleteTag(db.GetTag(name));
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
         }
 
         public bool AddPictureToDB(string path, List<string> selectedTags)
@@ -75,7 +119,6 @@ namespace Model
                 return true;
             }
         }
-
         public void GetPicturesPathesToView()
         {
             using (PictureInfoDB db = new PictureInfoDB(DBName))
